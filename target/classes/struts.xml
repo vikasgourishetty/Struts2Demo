@@ -13,13 +13,26 @@
             <result>/index.jsp</result>
         </action>
         
+        <action name="testDownLoad">
+			<result>jsp/downloadPage.jsp</result>
+   		</action>
+        
         <action name="hidden">
 			<result>jsp/hidden.jsp</result>
 		</action>
-	
+	 
 		<action name="helloHidden" class="com.vikas.action.HiddenAction" method="prepare">
 			<result name="success">jsp/welcome.jsp</result>
 		</action>
+		
+		<action name="download" class="com.vikas.action.DownloadAction">
+			<result name="success" type="stream">
+			  <param name="contentType">application/octet-stream</param>
+			  <param name="inputName">fileInputStream</param>
+			  <param name="contentDisposition">attachment;filename="${fileName}"</param>
+			  <param name="bufferSize">1024</param>
+			</result>
+   		</action>
  
     </package>
  
