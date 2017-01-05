@@ -7,7 +7,14 @@
  
     <constant name="struts.devMode" value="true" />
  
-    <package name="basicstruts2" extends="struts-default">
+    <package name="basicstruts2" namespace="/" extends="struts-default">
+    
+    	<result-types>
+        	<result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+	    </result-types>
+	    <interceptors>
+	        <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>
+	    </interceptors>
  
         <action name="index">
             <result>/index.jsp</result>
@@ -33,6 +40,38 @@
 			  <param name="bufferSize">1024</param>
 			</result>
    		</action>
+   		
+   		 <action name="loadBaseFileUpload">
+			<result>/jsp/fileUploadPage.jsp</result>
+		</action>
+   		
+   		<action name="fileUpload" class="com.vikas.action.FileUploadAction" method="execute">
+			 <result name="success">/jsp/fileUploadPage.jsp</result>
+		 	 <result type="json" >
+		        <param name="noCache">true</param>
+		        <param name="excludeNullProperties">true</param>
+		        <param name="root">jsonString</param>
+    		</result> 
+			<interceptor-ref name="defaultStack">
+				<param name="cvUpload.allowedTypes">text/plain,image/jpeg, application/pdf</param>
+			</interceptor-ref>
+		</action>
+		
+<!-- 		 <action name="/Struts2Demo/fileUpload" class="com.vikas.action.FileUploadAction" method="execute">
+			 <result name="success">/jsp/fileUploadPage.jsp</result>  
+		 	 <result type="json" >
+		        <param name="noCache">true</param>
+		        <param name="excludeNullProperties">true</param>
+		        <param name="root">jsonString</param>
+    		</result> 
+			<interceptor-ref name="defaultStack">
+				<param name="cvUpload.allowedTypes">text/plain,image/jpeg, application/pdf</param>
+			</interceptor-ref>
+		</action> -->
+		
+		<action name="fileRemove">
+			<result>/jsp/fileUploadPage.jsp</result>
+		</action>
  
     </package>
  
