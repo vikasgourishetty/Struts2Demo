@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
@@ -42,6 +43,9 @@ public class FileUploadAction extends ActionSupport {
 	}
 
 	public String getJsonString() {
+		/*if(StringUtils.isEmpty(jsonString)) {
+			jsonString = "asa";
+		}*/
 		return jsonString;
 	}
 
@@ -65,7 +69,7 @@ public class FileUploadAction extends ActionSupport {
 	    
 	    Gson gson = new Gson();
 	    
-	    setJsonString("");
+	    setJsonString("json-error");
 	    
 		return SUCCESS;
 	}

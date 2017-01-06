@@ -47,7 +47,12 @@
    		
    		<action name="fileUpload" class="com.vikas.action.FileUploadAction" method="execute">
 			 <result name="success">/jsp/fileUploadPage.jsp</result>
-		 	 <result type="json" >
+			  <result type="json" >
+		        <param name="noCache">true</param>
+		        <param name="excludeNullProperties">true</param>
+		        <param name="root">jsonString</param>
+    		 </result> 
+		 	<!--  <result type="json" >
 		        <param name="noCache">true</param>
 		        <param name="excludeNullProperties">true</param>
 		        <param name="root">jsonString</param>
@@ -55,6 +60,9 @@
 			<interceptor-ref name="defaultStack">
 				<param name="cvUpload.allowedTypes">text/plain,image/jpeg, application/pdf</param>
 			</interceptor-ref>
+			<interceptor-ref name="json">
+				<param name="jsonContentType">text/json</param>			
+			</interceptor-ref> -->
 		</action>
 		
 <!-- 		 <action name="/Struts2Demo/fileUpload" class="com.vikas.action.FileUploadAction" method="execute">

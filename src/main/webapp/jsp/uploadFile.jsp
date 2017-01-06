@@ -10,6 +10,7 @@
 </div>
 
 <script>
+var e1;
 	$(document).ready(function() {
 		//$("#rcr_pro_bio_per_cv").kendoUpload();
 		//var files = $$fileUI;
@@ -18,6 +19,8 @@
         	//{ name: "file1.doc", size: 525, extension: ".doc", url: "/Struts2Demo/fileDownload.action" }
    		 ]; 
 	
+		
+		
 		$("#rcr_pro_bio_per_cv").kendoUpload({
 				async : { 
 					saveUrl: "fileUpload",
@@ -27,16 +30,29 @@
                  multiple: false,
                  files: files,
                   success: function(e) {
+                	  e1 = e;
+                	  console.log("e.json= "+e.toString());
+                	  console.log("e = " +e.response);
+                	  
+                	                 	  
+                	  console.log("request = "+e.XMLHttpRequest.toString());
                   	var url = "fakeUrl" //e.response.url
                     var file = e.files[0];
                     var fileItem = this.wrapper.find("li[data-uid='" + file.uid + "']");
                     fileItem.find(".k-file-name").replaceWith("<a href='" + url + "'>" + file.name +"</a>");
+                    if (e.response == "json-error") {                    	
+                    	 fileItem.removeClass( "k-file-success" ).addClass( "k-file-error" );   
+                   		$("#rcr_pro_bio_per_prefixDiv .k-widget .k-dropzone .k-upload-status-total").replaceWith('<strong style="color:red !important; float: right;">Upload Failed</strong>');
+                    	$("#rcr_pro_bio_per_prefixDiv .k-widget ul li .k-upload-status").replaceWith('');
+              	  	}  
                   },
                   error: function(e) {
+                	  e1 = e;
                   	var url = "fakeUrl" //e.response.url
                     var file = e.files[0];
                     var fileItem = this.wrapper.find("li[data-uid='" + file.uid + "']");
-                    fileItem.find(".k-file-name").replaceWith("<a href='" + url + "'>" + file.name +"</a>");
+                    fileItem.find(".k-file-name").replaceWith("<a href='" + url + "'>" + file.name +"</a>");                                     
+                    
                   }
 			});
 			
